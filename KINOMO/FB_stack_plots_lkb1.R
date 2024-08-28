@@ -2,69 +2,15 @@
 library(ggplot2)
 
 # create a dataset
-tumor_nontumor <- read.csv(file="~/Documents/Izar_Group/durva/kinomo/downstream/durva_kinomo_enrichment_v1.csv")
-#tumor_nontumor <- read.csv(file="~/Documents/som_temp_10_28_21_onwards_mcbookpro/Ben_Izar_Project/melanoma/NMF_melanoma/melanoma_stack_plots_1.csv")
+tumor_nontumor <- read.csv(file="kinomo_enrichment_v1.csv")
 row.names(tumor_nontumor) <- tumor_nontumor[,1]
 tumor_nontumor<-tumor_nontumor[,-1]
 rownames(tumor_nontumor)
 tumor_nontumor<-as.data.frame(tumor_nontumor)
 
-# FB_CIN70 <- read.csv(file="~/Documents/Ben_Izar_Project/NMF/FB_CIN70.csv")
-# FB_CIN70 <- as.data.frame(FB_CIN70)
-# # Color palette v2
-# colPrimvsBMmain <- c('BRAIN_METS'='#FF0000','PRIMARY'='#0000FF')
-# colPrimvsBMmainTweakBM <- c('BRAIN_METS'='#FFF0F0','PRIMARY'='#0000FF')
-# colPrimvsBMmainTweakPRIMARY<- c('BRAIN_METS'='#FF0000','PRIMARY'='#EBF7FF')
-# colSTKvsNonSTKmain <- c('STK11-WT'='#3CB371', 'STK11-MUT'='#000000')
-# colSTKvsNonSTKTweakSTK <- c('Non-STK11-mut'='#3CB371', 'STK11-mut'='#F1F1F1')
-# colSTKvsNonSTKTweakNonSTK <- c('Non-STK11-mut'='#EBFFE3', 'STK11-mut'='#000000')
-# 
-# colPrimvsBMvsSTKvsNonSTKmain <- c('Non-STK11-mut (BRAIN_METS)'='#00CED1','Non-STK11-mut (PRIMARY)'='#696969','STK11-mut (BRAIN_METS)'='#FF4500','STK11-mut (PRIMARY)'='#4B0082')
-# 
-# #colPrimvsBMvsSTKvsNonSTKmain <- c('Non-STK11-mut_BRAIN_METS'='#3CB371','Non-STK11-mut_PRIMARY'='#2F4F4F','STK11-mut_BRAIN_METS'='#FF4500','STK11-mut_PRIMARY'='#4B0082')
-# 
-# colPrimvsBMvsSTKvsNonSTKTweakNonSTKPrim.STKPrim.STKBM <- c('Non-STK11-mut (BRAIN_METS)'='#00CED1','Non-STK11-mut (PRIMARY)'='#F2F2F2','STK11-mut (BRAIN_METS)'='#FCF2EE','STK11-mut (PRIMARY)'='#F1E9F7')
-# 
-# colPrimvsBMvsSTKvsNonSTKTweakNonSTKBM.STKPrim.STKBM <- c('Non-STK11-mut (BRAIN_METS)'='#E3FDEF','Non-STK11-mut (PRIMARY)'='#696969','STK11-mut (BRAIN_METS)'='#FCF2EE','STK11-mut (PRIMARY)'='#F1E9F7')
-# 
-# colPrimvsBMvsSTKvsNonSTKTweakSTKPrim.NonSTKPrim.NonSTKBM <- c('Non-STK11-mut (BRAIN_METS)'='#E3FDEF','Non-STK11-mut (PRIMARY)'='#F2F2F2','STK11-mut (BRAIN_METS)'='#FF4500','STK11-mut (PRIMARY)'='#F1E9F7')
-# 
-# colPrimvsBMvsSTKvsNonSTKTweakSTKBM.NonSTKPrim.NonSTKBM <- c('Non-STK11-mut (BRAIN_METS)'='#E3FDEF','Non-STK11-mut (PRIMARY)'='#F2F2F2','STK11-mut (BRAIN_METS)'='#FCF2EE','STK11-mut (PRIMARY)'='#4B0082')
-# 
-# c
-# cols = c(
-#   'Primary'='#A80D11',
-#   'Brain_Mets'='#008DB8')
-# 
-# cols = c(
-#   'STK11-MUT'='#A80D11',
-#   'STK11-WT'='#008DB8')
-# 
-# cols = c(
-#   'PA001' = '#808080', 'PA004' = '#d3d3d3', 'PA005' = '#2f4f4f',
-#    'PA019' = '#556b2f', 'PA025' = '#8b4513','PA034' = '#2e8b57', 'PA042' = '#228b22',
-#  'PA043' = '#7f0000','PA048' = '#191970', 'PA054' = '#808000', 'PA056' = '#b8860b',
-#    'PA060' = '#008b8b',
-#     'PA067' = '#4682b4', 'PA068' = '#d2691e','PA070' = '#9acd32','PA072' = '#cd5c5c',
-#     'PA076' = '#00008b', 'PA080' = '#32cd32','PA104' = '#8fbc8f','PA125' = '#8b008b',
-#    'PA141' = '#b03060','N254' = '#ff4500',#'N561' = '#00ced1',
-#  'N586' = '#ffa500',
-#     'KRAS_10' = '#ffd700', 'KRAS_11' = '#6a5acd', 'KRAS_12' = '#deb887',
-#   'KRAS_13' = '#00ff00', 'KRAS_17' = '#00fa9a', 'KRAS_4' = '#dc143c',
-#     'KRAS_6' = '#0000ff', 'KRAS_7' = '#a020f0', 'KRAS_8' = '#adff2f',
-#    'STK_1' = '#da70d6', 'STK_14' = '#ff00ff', 'STK_15' = '#1e90ff',
-#   'STK_18' = '#f0e68c', 'STK_2' = '#dda0dd','STK_20' = '#90ee90',
-#    'STK_21' = '#ffa07a', 'STK_22dot2' = '#87cefa', 'STK_3' = '#7fffd4',
-#   'STK_5dot1' = '#ff69b4','STK_5dot1' = '#ffb6c1'
-# )
 
 library(dplyr)
 
-# ggplot(data= iris, aes(x= Sepal.Width, fill= Species))+
-#   geom_bar() +
-#   geom_text(stat = "count", aes(label =..count..), position=position_stack(vjust=0.5))+
-#   scale_y_continuous(limits = c(0,20))
-# iris
 cols <- colSTKvsNonSTKmain
 cols <- colPrimvsBMmain
 tumor_nontumor <- tumor_nontumor %>%
@@ -73,13 +19,7 @@ tumor_nontumor <- tumor_nontumor %>%
   mutate(ypos = cumsum(Number) - 0.5 * Number,
          label = paste0(Type, ":", Number, "-factor")) 
 
-#tumor_nontumor$Sample <- factor(tumor_nontumor$Sample, levels=tumor_nontumor$Sample[order(tumor_nontumor$Sample)])
 tumor_nontumor$Sample = factor(tumor_nontumor$Sample, levels = unique(tumor_nontumor$Sample))
-
-# a <- tumor_nontumor
-# b <- FB_CIN70
-# 
-# df <- merge(a,b,by=tumor_nontumor$Sample)
 
 ggplot(tumor_nontumor, aes(x = factor(Sample, level = c('MP1','MP2','MP3','MP4','MP5','MP6','MP7','MP8','MP9','MP10','MP11','MP12','MP13','MP14','MP15')), y = Number, fill = Type, group=1,label=Number)) + 
   geom_col(aes(y = Number, fill = Type)) + ggtitle("NSCLC: KINOMO Metaprograms (Sample-wise)")+
@@ -115,63 +55,6 @@ theme_bw()+
   ggtitle("NSCLC: KINOMO Metaprograms (STK11-MUT vs STK11-WT) ")
 #ggtitle("NSCLC: KINOMO Metaprograms (Sample-wise)")
 #theme_ipsum()
-
-# yplot + stat_compare_means()+theme(text = element_text(size = 16))+   # Add counts by group to boxplot
-#   annotate("text",
-#            #x = 1:length(table(ichorcna_data$Sample.Type)),
-#            x = 1:length(table(tumor_nontumor$Sample)),
-#            y = aggregate(Number ~ Sample, tumor_nontumor, median)[ , 2],
-#            label = table(tumor_nontumor$Sample),
-#            col = "White",
-#            vjust = - 1)
-
-#df$derma <- factor(df$derma, levels = df$derma[order(df$prevalence)])
-#df1$col1 = factor(df1$col1)
-#p <- ggplot()
-ggplot(data = tumor_nontumor, aes(x = factor(Sample, level = c('MP1','MP2','MP3','MP4','MP5','MP6','MP7','MP8','MP9','MP10','MP11','MP12','MP13','MP14','MP15')),y = Number, fill = Type)) + 
-  geom_bar( stat='identity')+
-  #  geom_bar(position = "fill", stat='identity')+
-#  geom_line(aes(y = FB_CIN70$CIN70), color = "red") 
-  theme_bw()+
-  scale_fill_manual(values=cols)+
-  ggtitle("NSCLC KINOMO FB-sample contributions") +
-  #ggtitle("NSCLC KINOMO FB: Primary vs Brain_Mets") +
-  #ggtitle("NSCLC KINOMO FB: STK11-mut vs Non-STK11-mut") +
-  xlab("Samples") + 
-  # ylab("Percentage")+
-  ylab("Count") + theme(text = element_text(size = 20)) # +#theme(axis.text.x=element_text(size=rel(1.1))
-
-#aes(x = factor(Sample, level = c('MP1','MP2','MP3','MP4','MP5','MP6','MP7','MP8','MP9','MP10','MP11','MP12','MP13','MP14','MP15')),y = Number, fill = Type)) + 
-level_order <- factor(tumor_nontumor$Sample, level = c('MP1','MP2','MP3','MP4','MP5','MP6','MP7','MP8','MP9',
-                                                       'MP10','MP11','MP12','MP13','MP14','MP15'))
-
-ggplot(tumor_nontumor, aes(x=level_order,  y=Number,fill=Type )) + 
-#ggplot(tumor_nontumor, aes(fill=Type, y=Number, x=Sample)) + 
-  geom_bar(stat="identity")+
-  #geom_bar(stat="identity")+
-  theme_bw()+
-  scale_fill_manual(values=cols)
-
-# df <- merge(a,b,by="x")
-#   
-# ggplot(df, aes(x=x, y=y.x, fill=z)) +
-#     geom_bar(position="stack",stat="identity") + 
-#     geom_line(aes(x=x, y=y.y)) + 
-#     ylab("") + xlab("x")
-# geom_text(position="stack",aes(Sample,Number,label=Type),size=5)
-# geom_text(aes(label=Type), position=position_dodge(cumsum(Number) - 0.5 * Number))
-# geom_text(stat = "Number", aes(label =..Number..), position=position_stack(vjust=0.5))
-#ggsave("Melanoma_KINOMO_FB_sample_contributions_percent.pdf",height = 10,width = 10)
-#ggsave("Melanoma_KINOMO_FB_sample_contributions_count.pdf",height = 10,width = 10)
-#ggsave("NSCLC_KINOMO_FB_sample_contributions_count_all_samples.pdf",height = 10,width = 10)
-#ggsave("NSCLC_KINOMO_FB_sample_contributions_count_all_samples_v3.pdf",height = 10,width = 15)
-#ggsave("NSCLC_KINOMO_FB_sample_contributions_count_stk11_vs_nonstk11.pdf",height = 10,width = 10)
-#ggsave("NSCLC_KINOMO_FB_sample_contributions_count_stk11_vs_nonstk11_v2.pdf",height = 10,width = 15)
-#ggsave("NSCLC_KINOMO_FB_sample_contributions_count_prim_vs_bm.pdf",height = 10,width = 10)
-#ggsave("NSCLC_KINOMO_FB_sample_contributions_count_prim_vs_bm_v2.pdf",height = 10,width = 15)
-#ggsave("NSCLC_KINOMO_FB_sample_contributions_count_prim_vs_bm_v3.pdf",height = 10,width = 15)
-#ggsave("NSCLC_KINOMO_FB_sample_contributions_count_stk11_vs_nonstk11_v3.pdf",height = 10,width = 15)
-ggsave("NSCLC_KINOMO_FB_sample_contributions_count_stk11_vs_nonstk11_v5.pdf",height = 10,width = 15)
 
 
 ############ selected genes
